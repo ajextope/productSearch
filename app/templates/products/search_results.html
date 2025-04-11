@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2 class="display-6">Search Results</h2>
+        <div class="card mb-4">
+            <div class="row g-0">
+                <div class="col-md-2">
+                    <img src="{{ query_image }}" class="img-fluid rounded-start" alt="Search image">
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title">Visual Similarity Results</h5>
+                        <p class="card-text">
+                            Found {{ results|length }} similar products
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for product, similarity in results %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text text-muted">{{ product.description|truncatechars:50 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge bg-primary rounded-pill">
+                        Similarity: {{ similarity|floatformat:2 }}
+                    </span>
+                    <span class="h5 text-success">NGN{{ product.price }}</span>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                    Posted by {{ product.owner.username }} 
+                    {{ product.created_at|timesince }} ago
+                </small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

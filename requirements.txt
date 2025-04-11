@@ -1,0 +1,11 @@
+tensorflow 
+opencv-python 
+scikit-learn 
+matplotlib 
+tqdm
+ipykernel
+django 
+pillow 
+numpy 
+django-crispy-forms 
+django-extensions

@@ -1,0 +1,35 @@
+# tensorflow 
+# opencv-python 
+# scikit-learn 
+# matplotlib 
+# tqdm
+# ipykernel
+# django
+# mysqlclient 
+# pillow 
+# numpy 
+# django-crispy-forms 
+# django-extensions
+
+# Core Django
+django==4.2
+django-crispy-forms==2.0
+django-extensions==3.2.3
+mysqlclient==2.1.1  # Optional but included as per your list
+
+# Image Processing
+pillow==10.0.0
+opencv-python-headless==4.7.0.72  # Using headless version for Docker
+
+# Machine Learning
+tensorflow==2.12.0
+scikit-learn==1.2.2
+numpy==1.24.3
+
+# Utilities
+matplotlib==3.7.1
+tqdm==4.65.0
+ipykernel==6.22.0  # Only needed if using Jupyter
+
+# Production
+gunicorn==20.1.0

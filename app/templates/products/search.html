@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0"><i class="bi bi-search"></i> Visual Product Search</h3>
+                </div>
+                <div class="card-body text-center">
+                    <form method="post" enctype="multipart/form-data" class="mb-4">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="imageUpload" class="form-label">Upload product image to find similar items</label>
+                            <input class="form-control" type="file" id="imageUpload" name="image" accept="image/*" required>
+                            <div class="form-text">Supported formats: JPG, PNG, WEBP</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-search"></i> Search Similar Products
+                        </button>
+                    </form>
+                    
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">How it works</h5>
+                        <p>Our AI will analyze your product image and find visually similar items from our catalog.</p>
+                        <hr>
+                        <p class="mb-0">For best results, use clear product images with plain backgrounds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

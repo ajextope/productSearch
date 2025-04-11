@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageSearch Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">ImageSearch</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product-list' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product-create' %}">Sell</a>
+                    </li>
+                </ul>
+                <form class="d-flex ms-3" method="post" action="{% url 'image-search' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="file" name="image" accept="image/*" required>
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </form>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5 flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-auto">
+        <div class="container py-5 text-white">
+            <div class="row g-4">
+                <!-- Company Info -->
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase mb-4">
+                        <i class="bi bi-camera me-2"></i> ImageSearch
+                    </h5>
+                    <p class="text-white">
+                        AI-powered visual product discovery platform revolutionizing e-commerce through computer vision and deep learning.
+                    </p>
+                    <div class="mt-4 text-white">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-uppercase mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'product-list' %}" class=" text-decoration-none">Browse Products</a></li>
+                        <li class="mb-2"><a href="{% url 'product-create' %}" class=" text-white text-decoration-none">Sell With Us</a></li>
+                        <li class="mb-2"><a href="{% url 'image-search' %}" class=" text-decoration-none text-white">Visual Search</a></li>
+                        <li class="mb-2"><a href="#" class=" text-decoration-none text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Technologies -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-uppercase mb-4">Powered By</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-white me-2"></i> Django Framework</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-white me-2"></i> ResNet50 AI Model</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-white me-2"></i> Bootstrap 5</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-white me-2"></i> SQLite Database</li>
+                    </ul>
+                </div>
+    
+                <!-- Contact -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-uppercase mb-4">Contact</h5>
+                    <ul class="list-unstyled text-white">
+                        <li class="mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Afe Babalola University, Ado-Ekiti</li>
+                        <li class="mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> support@afebabalola.edu.ng</li>
+                        <li class="mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> +234 8060 000311</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <hr class="my-4 bg-secondary">
+    
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-muted">
+                        &copy; 2024-2025 Product Image Detection System in Ecommerce Website. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 text-muted">
+                        <a href="#" class="text-decoration-none text-muted">Terms of Service</a> | 
+                        <a href="#" class="text-decoration-none text-muted">Privacy Policy</a> | 
+                        <a href="#" class="text-decoration-none text-muted">GDPR</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
